@@ -19,7 +19,9 @@
     "prepare": "husky install",
     "add:husky-lint-staged": "husky add .husky/pre-commit 'npx lint-staged'",
     "add:husky-commitlint": "npx husky add .husky/commit-msg 'npx --no -- commitlint --edit ${1}'",
-    "preinstall": "npx only-allow yarn"
+    "preinstall": "npx only-allow yarn",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write ."
   },
   "dependencies": {
     "@vitejs/plugin-vue": "^4.2.3",

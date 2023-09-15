@@ -26,6 +26,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'vue'],
   rules: {
+    'vue/multi-word-component-names': ['off'],
     '@typescript-eslint/no-explicit-any': ['off'],
     curly: [2, 'multi-line'], // 允许使用不带大括号的单行if、else if、else、for、while或do，同时仍然强制对其他实例使用大括号。
     eqeqeq: [0, 'always'], // 强制使用===和！==在任何情况下

@@ -1,20 +1,10 @@
 <script setup lang="ts">
-import useCurrentInstance from '@/hooks/useCurrentInstance';
-import { CacheType } from '@utils/cache';
-
-const { proxy } = useCurrentInstance();
-proxy.$cache.set('alibi', '214214', CacheType.Session);
-console.log(proxy.$cache.get('alibi', CacheType.Session));
+import RouteLayout from '@/layouts/RouteLayout/RouteLayout.vue';
 </script>
 
 <template>
-  <div>
-    <a class="w-10" href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="layout">
+    <RouteLayout name="test" path="test/index" />
   </div>
 </template>
 

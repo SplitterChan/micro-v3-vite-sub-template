@@ -22,5 +22,6 @@ declare global {
     __WUJIE_UNMOUNT: () => void;
     // 子应用无界实例
     __WUJIE: { mount: () => void };
+    $wujie?: any;
   }
 }
