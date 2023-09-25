@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import useGlobalContext from '@/hooks/useGlobalContext';
 
-const { setState } = useGlobalContext();
+const { state, setState } = useGlobalContext();
 
 function changeGlobalState() {
-  setState({ name: '4335' });
+  setState({ count: state['main'].count + 1 }, 'main');
 }
 </script>
 
