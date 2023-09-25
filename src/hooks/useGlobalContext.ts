@@ -1,4 +1,3 @@
-// import { toRefs } from 'vue';
 import { name } from '~/package.json';
 
 export default function useGlobalContext() {
