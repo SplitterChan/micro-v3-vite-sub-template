@@ -26,7 +26,7 @@
       "./*": ["./*"],
       "../*": ["../*"]
     },
-    "types": ["vite/client"],
+    "types": ["vite/client", "vite-plugin-vue-layouts/client"],
     "allowSyntheticDefaultImports": true
   },
   "exclude": ["node_modules"],

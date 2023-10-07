@@ -4,12 +4,20 @@ import App from './App.vue';
 import 'uno.css';
 import { createPinia } from 'pinia';
 import Cache from './utils/cache';
+import { createRouter, createWebHashHistory } from 'vue-router';
+import { setupLayouts } from 'virtual:generated-layouts';
+import generatedRoutes from 'virtual:generated-pages';
 
 const pinia = createPinia();
 
 const cacheInstance = new Cache();
 
-const instance = createApp(App).use(pinia).use(cacheInstance);
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes: setupLayouts(generatedRoutes)
+});
+
+const instance = createApp(App).use(router).use(pinia).use(cacheInstance);
 
 if (window.__POWERED_BY_WUJIE__) {
   window.__WUJIE_MOUNT = () => {
