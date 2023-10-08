@@ -6,19 +6,13 @@ import {
   presetAttributify
 } from 'unocss';
 
-export const theme = {
-  colors: {
-    primary: 'var(--adm-color-primary)',
-    text: 'var(--adm-color-text)',
-    sed: 'var(--adm-color-text-secondary)',
-    light: 'var(--adm-color-light)'
-  }
-};
-
 export const unocssPresets = [presetUno(), presetAttributify(), presetIcons()];
 
 export default defineConfig({
   presets: unocssPresets,
-  rules: [],
-  theme: theme
+  rules: [
+    ['flex', { display: 'flex' }],
+    [/^m-([\.\d]+)$/, ([, num]) => ({ margin: `${num}px` })],
+    [/^p-([\.\d]+)$/, ([, num]) => ({ padding: `${num}px` })]
+  ]
 });

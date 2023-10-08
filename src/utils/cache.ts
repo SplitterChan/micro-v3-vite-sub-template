@@ -66,7 +66,7 @@ export default class Cache {
     return this.uuid ? `${key}-${this.uuid}` : key;
   };
 
-  cacheHanlderTarget = (
+  cacheHandlerTarget = (
     handlerType: HandlerType,
     type: CacheType = CacheType.Session
   ) => {
@@ -84,7 +84,7 @@ export default class Cache {
     type: CacheType = CacheType.Session,
     ...rest: any[]
   ) => {
-    const { instance, handler } = this.cacheHanlderTarget(handlerType, type);
+    const { instance, handler } = this.cacheHandlerTarget(handlerType, type);
     const uniqueKey = this.combineUniqueKey(key);
     return (handler as any).call(instance, uniqueKey, ...rest);
   };
@@ -95,7 +95,7 @@ export default class Cache {
     type: CacheType = CacheType.Session,
     ...rest: any[]
   ) => {
-    const { instance, handler } = this.cacheHanlderTarget(handlerType, type);
+    const { instance, handler } = this.cacheHandlerTarget(handlerType, type);
     return (handler as any).call(instance, key, ...rest);
   };
 
