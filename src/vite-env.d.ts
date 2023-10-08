@@ -24,9 +24,3 @@ declare interface Window {
   __WUJIE: { mount: () => void };
   $wujie?: any;
 }
-
-declare module 'virtual:generated-layouts' {
-  export const setupLayouts: any;
-}
-
-declare module 'virtual:generated-pages' {}
