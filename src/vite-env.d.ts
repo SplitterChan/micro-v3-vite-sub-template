@@ -1,4 +1,5 @@
 // / <reference types="vite/client" />
+// / <reference types="vite-plugin-pages/client" />
 
 declare module '*.vue' {
   import { ComponentOptions } from 'vue';
@@ -23,3 +24,9 @@ declare interface Window {
   __WUJIE: { mount: () => void };
   $wujie?: any;
 }
+
+declare module 'virtual:generated-layouts' {
+  export const setupLayouts: any;
+}
+
+declare module 'virtual:generated-pages' {}

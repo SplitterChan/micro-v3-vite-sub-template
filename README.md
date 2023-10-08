@@ -48,15 +48,34 @@ console.log(proxy.$cache.get('token', CacheType.Session));
 工程使用了vite-plugin-pages插件，实现约定式路由。默认路由入口文件夹为pages文件夹，index.vue为默认路由文件。
 
 项目搭配使用了vite-plugin-vue-layouts实现快捷页面布局模版功能，项目默认配置布局模版为BaseLayout.vue。
-自定义模版文件使用方式如下：
+自定义模版文件使用方式有两种如下：
+
+(1) yaml模式
+
+```javascript
+<script setup lang="ts">
+</script>
+<template></template>
+<route lang="yaml">
+meta:
+  layout: OtherLayout   // OtherLayout为其他模版文件名，省略.vue后缀
+</route>
+```
+
+(2) json模式
 
 ```javascript
 <script setup lang="ts">
 </script>
 <template></template>
 <route>
-meta:
-  layout: OtherLayout   // OtherLayout为其他模版文件名，省略.vue后缀
+{
+  name: "Xxx",
+  meta: {
+    layout: OtherLayout   // OtherLayout为其他模版文件名，省略.vue后缀
+    title: "xxx"
+  }
+}
 </route>
 ```
 

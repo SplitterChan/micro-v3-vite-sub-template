@@ -17,6 +17,11 @@ const router = createRouter({
   routes: setupLayouts(generatedRoutes)
 });
 
+router.beforeEach((to, from, next) => {
+  to.meta.title && (document.title = to.meta.title as string);
+  next();
+});
+
 const instance = createApp(App).use(router).use(pinia).use(cacheInstance);
 
 if (window.__POWERED_BY_WUJIE__) {
