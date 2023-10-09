@@ -1,5 +1,6 @@
 import { App } from 'vue';
 import jsCookie from 'js-cookie';
+import { name } from '~/package.json';
 
 export enum CacheType {
   Session = 'sessionStorage',
@@ -13,22 +14,31 @@ export enum HandlerType {
   Remove = 'remove'
 }
 
-export default class Cache {
-  uuid: string | undefined = undefined;
+class Cache {
+  static instance: typeof Cache;
+  private readonly uuid: string | undefined = undefined;
 
   constructor() {
+    Cache.instance = this;
     if (import.meta.env.PROD) {
-      const sessionUuid = sessionStorage.getItem('CacheUuid');
+      const sessionUuid = sessionStorage.getItem(`${name}-CacheUuid`);
       this.uuid = sessionUuid ?? new Date().getTime().toString();
-      this.uuid && sessionStorage.setItem('CacheUuid', this.uuid);
+      this.uuid && sessionStorage.setItem(`${name}-CacheUuid`, this.uuid);
     }
   }
 
-  install = (app: App): void => {
-    app.config.globalProperties.$cache = this;
+  static initial() {
+    if (!Cache.instance) {
+      new Cache();
+    }
+    return Cache.instance;
+  }
+
+  public install = (app: App): void => {
+    app.config.globalProperties.$cache = Cache.instance;
   };
 
-  getCacheInstance = (type: CacheType) => {
+  private getCacheInstance = (type: CacheType) => {
     switch (type) {
       case CacheType.Session:
         return window.sessionStorage;
@@ -39,7 +49,7 @@ export default class Cache {
     }
   };
 
-  getHandlerMethod = (type: CacheType, handler: HandlerType) => {
+  private getHandlerMethod = (type: CacheType, handler: HandlerType) => {
     switch (type) {
       case CacheType.Session:
         return handler === HandlerType.Get
@@ -62,11 +72,11 @@ export default class Cache {
     }
   };
 
-  combineUniqueKey = (key: string) => {
+  private combineUniqueKey = (key: string) => {
     return this.uuid ? `${key}-${this.uuid}` : key;
   };
 
-  cacheHandlerTarget = (
+  private cacheHandlerTarget = (
     handlerType: HandlerType,
     type: CacheType = CacheType.Session
   ) => {
@@ -78,7 +88,7 @@ export default class Cache {
     };
   };
 
-  cacheHandlerBase = (
+  private cacheHandlerBase = (
     key,
     handlerType: HandlerType,
     type: CacheType = CacheType.Session,
@@ -89,7 +99,7 @@ export default class Cache {
     return (handler as any).call(instance, uniqueKey, ...rest);
   };
 
-  cachePublicHandlerBase = (
+  private cachePublicHandlerBase = (
     key,
     handlerType: HandlerType,
     type: CacheType = CacheType.Session,
@@ -99,7 +109,7 @@ export default class Cache {
     return (handler as any).call(instance, key, ...rest);
   };
 
-  publicSet = (
+  public publicSet = (
     key: string,
     value: any,
     type: CacheType = CacheType.Session,
@@ -114,11 +124,11 @@ export default class Cache {
     return this.cachePublicHandlerBase(key, HandlerType.Get, type);
   };
 
-  publicRemove = (key: string, type: CacheType = CacheType.Session) => {
+  public publicRemove = (key: string, type: CacheType = CacheType.Session) => {
     return this.cachePublicHandlerBase(key, HandlerType.Remove, type);
   };
 
-  set = (
+  public set = (
     key: string,
     value: any,
     type: CacheType = CacheType.Session,
@@ -127,11 +137,13 @@ export default class Cache {
     this.cacheHandlerBase(key, HandlerType.Set, type, value, { expires });
   };
 
-  get = (key: string, type: CacheType = CacheType.Session) => {
+  public get = (key: string, type: CacheType = CacheType.Session) => {
     return this.cacheHandlerBase(key, HandlerType.Get, type);
   };
 
-  remove = (key: string, type: CacheType = CacheType.Session) => {
+  public remove = (key: string, type: CacheType = CacheType.Session) => {
     this.cacheHandlerBase(key, HandlerType.Remove, type);
   };
 }
+
+export default Cache.initial();
