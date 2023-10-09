@@ -24,6 +24,7 @@
     "prettier:fix": "prettier --write ."
   },
   "dependencies": {
+    "@arco-themes/vue-mjkgeneral": "^0.0.1",
     "@vitejs/plugin-vue": "^4.2.3",
     "axios": "0.21.1",
     "element-plus": "^2.3.12",
@@ -36,6 +37,8 @@
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@arco-design/web-vue": "^2.52.0",
+    "@arco-plugins/vite-vue": "^1.4.5",
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "@types/js-cookie": "^3.0.3",
@@ -47,12 +50,14 @@
     "eslint": "^8.49.0",
     "eslint-plugin-vue": "^9.17.0",
     "husky": "^8.0.3",
+    "less": "^4.2.0",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
     "sass": "^1.66.1",
     "sass-loader": "^13.3.2",
     "typescript": "^5.0.2",
     "unocss": "^0.55.7",
+    "unplugin-auto-import": "^0.16.6",
     "unplugin-vue-components": "^0.25.2",
     "vite-plugin-pages": "^0.31.0",
     "vite-plugin-vue-layouts": "^0.8.0",

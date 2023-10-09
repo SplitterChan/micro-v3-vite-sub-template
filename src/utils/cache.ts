@@ -15,7 +15,7 @@ export enum HandlerType {
 }
 
 class Cache {
-  static instance: typeof Cache;
+  static instance: Cache;
   private readonly uuid: string | undefined = undefined;
 
   constructor() {
