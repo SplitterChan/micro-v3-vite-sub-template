@@ -4,9 +4,12 @@ import vue from '@vitejs/plugin-vue';
 import eslint from 'vite-plugin-eslint';
 import UnoCSS from 'unocss/vite';
 import unocssConfig from './uno.config';
+import AutoImport from 'unplugin-auto-import/vite';
 import Pages from 'vite-plugin-pages';
 import Layouts from 'vite-plugin-vue-layouts';
 import Components from 'unplugin-vue-components/vite';
+import { ArcoResolver } from 'unplugin-vue-components/resolvers';
+import { vitePluginForArco } from '@arco-plugins/vite-vue';
 
 function _resolve(dir: string) {
   return path.resolve(__dirname, dir);
@@ -25,7 +28,19 @@ export default defineConfig({
       layoutsDirs: 'src/layouts',
       defaultLayout: 'BaseLayout'
     }),
-    Components(),
+    AutoImport({
+      resolvers: [ArcoResolver()]
+    }),
+    Components({
+      resolvers: [
+        ArcoResolver({
+          sideEffect: true
+        })
+      ]
+    }),
+    vitePluginForArco({
+      theme: '@arco-themes/vue-mjkgeneral'
+    }),
     UnoCSS(unocssConfig)
   ],
   envDir: _resolve('environments'),

@@ -10,9 +10,7 @@ import generatedRoutes from 'virtual:generated-pages';
 
 const pinia = createPinia();
 
-const cacheInstance = new Cache();
-
-const router = createRouter({
+export const router = createRouter({
   history: createWebHashHistory(),
   routes: setupLayouts(generatedRoutes)
 });
@@ -22,10 +20,12 @@ router.beforeEach((to, from, next) => {
   next();
 });
 
-const instance = createApp(App).use(router).use(pinia).use(cacheInstance);
+const appInit = () => createApp(App).use(router).use(pinia).use(Cache);
 
 if (window.__POWERED_BY_WUJIE__) {
+  let instance;
   window.__WUJIE_MOUNT = () => {
+    instance = appInit();
     instance.mount('#app');
   };
   window.__WUJIE_UNMOUNT = () => {
@@ -33,5 +33,5 @@ if (window.__POWERED_BY_WUJIE__) {
   };
   window.__WUJIE.mount();
 } else {
-  instance.mount('#app');
+  appInit().mount('#app');
 }
