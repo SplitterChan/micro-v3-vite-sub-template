@@ -20,10 +20,12 @@ router.beforeEach((to, from, next) => {
   next();
 });
 
-const instance = createApp(App).use(router).use(pinia).use(Cache);
+const appInit = () => createApp(App).use(router).use(pinia).use(Cache);
 
 if (window.__POWERED_BY_WUJIE__) {
+  let instance;
   window.__WUJIE_MOUNT = () => {
+    instance = appInit();
     instance.mount('#app');
   };
   window.__WUJIE_UNMOUNT = () => {
@@ -31,5 +33,5 @@ if (window.__POWERED_BY_WUJIE__) {
   };
   window.__WUJIE.mount();
 } else {
-  instance.mount('#app');
+  appInit().mount('#app');
 }
