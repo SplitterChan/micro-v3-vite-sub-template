@@ -15,7 +15,7 @@ export const router = createRouter({
   routes: setupLayouts(generatedRoutes)
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _, next) => {
   to.meta.title && (document.title = to.meta.title as string);
   next();
 });
