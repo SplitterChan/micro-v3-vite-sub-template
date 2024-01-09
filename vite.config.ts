@@ -10,6 +10,7 @@ import Layouts from 'vite-plugin-vue-layouts';
 import Components from 'unplugin-vue-components/vite';
 import { ArcoResolver } from 'unplugin-vue-components/resolvers';
 import { vitePluginForArco } from '@arco-plugins/vite-vue';
+import { name } from './package.json';
 
 function _resolve(dir: string) {
   return path.resolve(__dirname, dir);
@@ -17,6 +18,7 @@ function _resolve(dir: string) {
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: `/${name}`,
   plugins: [
     vue(),
     eslint(),
