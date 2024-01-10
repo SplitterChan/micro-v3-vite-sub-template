@@ -7,20 +7,24 @@ import Cache from './utils/cache';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { setupLayouts } from 'virtual:generated-layouts';
 import generatedRoutes from 'virtual:generated-pages';
-
 const pinia = createPinia();
 
-export const router = createRouter({
-  history: createWebHashHistory(),
-  routes: setupLayouts(generatedRoutes)
-});
+const initRouter = () => {
+  const router = createRouter({
+    history: createWebHashHistory(),
+    routes: setupLayouts(generatedRoutes)
+  });
+  router.beforeEach((to, _, next) => {
+    to.meta.title && (document.title = to.meta.title as string);
+    next();
+  });
+  return router;
+};
 
-router.beforeEach((to, _, next) => {
-  to.meta.title && (document.title = to.meta.title as string);
-  next();
-});
-
-const appInit = () => createApp(App).use(router).use(pinia).use(Cache);
+const appInit = () => {
+  const router = initRouter();
+  return createApp(App).use(router).use(pinia).use(Cache);
+};
 
 if (window.__POWERED_BY_WUJIE__) {
   let instance;
