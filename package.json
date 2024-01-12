@@ -30,6 +30,7 @@
     "element-plus": "^2.3.12",
     "js-cookie": "^3.0.5",
     "pinia": "^2.1.6",
+    "qs": "^6.11.2",
     "terser": "^5.19.4",
     "vite": "^4.4.5",
     "vite-plugin-eslint": "^1.8.1",

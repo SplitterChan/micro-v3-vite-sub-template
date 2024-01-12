@@ -1,10 +1,17 @@
-import { router } from '@/main';
+import { useRouter } from 'vue-router';
+import { stringify } from 'qs';
 
 export default function useDispatchRouteChange() {
-  const dispatch = path => {
+  const router = useRouter();
+
+  const dispatch = (...arg) => {
+    const [path, query = {}] = arg;
     window.$wujie
-      ? window.$wujie?.bus.$emit('route-change', path)
-      : router.push({ path });
+      ? window.$wujie?.bus.$emit(
+          'route-change',
+          query ? `${path}=${stringify(query)}` : path
+        )
+      : router.push({ path, query });
   };
   return { dispatch };
 }
