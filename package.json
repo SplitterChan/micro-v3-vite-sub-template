@@ -9,6 +9,9 @@
   },
   "scripts": {
     "start": "vite --mode develop",
+    "start:test": "vite --mode uat",
+    "start:pre": "vite --mode sit",
+    "start:prod": "vite --mode production",
     "build:dev": "vue-tsc && vite build --mode develop",
     "build:test": "vue-tsc && vite build --mode uat",
     "build:pre": "vue-tsc && vite build --mode sit",

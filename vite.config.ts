@@ -48,7 +48,7 @@ export default defineConfig({
   envDir: _resolve('environments'),
   server: {
     cors: true,
-    port: 8080
+    port: 8082
   },
   resolve: {
     alias: {

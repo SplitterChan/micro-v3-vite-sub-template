@@ -2,6 +2,7 @@ html,
 body,
 #app {
   height: 100%;
+  color: #1d2129;
 }
 
 body,
@@ -112,4 +113,17 @@ textarea {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+.layout {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.arco-form-item-label-col > .arco-form-item-label {
+  color: #1d2129 !important;
+}
+
+.arco-table-td-content .arco-btn-text {
+  padding: 0;
 }
