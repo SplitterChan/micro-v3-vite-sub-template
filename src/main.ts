@@ -30,7 +30,11 @@ const initRouter = () => {
 
 const appInit = () => {
   const router = initRouter();
-  return createApp(App).use(router).use(pinia).use(Cache).directive('permission', permission); ;
+  return createApp(App)
+    .use(router)
+    .use(pinia)
+    .use(Cache)
+    .directive('permission', permission);
 };
 
 if (window.__POWERED_BY_WUJIE__) {

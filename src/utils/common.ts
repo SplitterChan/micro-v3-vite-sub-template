@@ -43,7 +43,7 @@ export function isJsonString(str) {
 }
 
 export function logout() {
-    window.$wujie && window.$wujie?.bus.$emit('logout');
+  window.$wujie && window.$wujie?.bus.$emit('logout');
 }
 
 // 判断是否为复杂类型数据

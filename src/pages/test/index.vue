@@ -10,7 +10,9 @@ function changeGlobalState() {
 
 <template>
   <div>
-    <a-button v-permission="['text']" type="primary" @click="changeGlobalState">change</a-button>
+    <a-button v-permission="['text']" type="primary" @click="changeGlobalState">
+      change
+    </a-button>
     <a-button status="danger">跳转登录</a-button>
   </div>
 </template>
