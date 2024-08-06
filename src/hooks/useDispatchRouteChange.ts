@@ -5,12 +5,9 @@ export default function useDispatchRouteChange() {
   const router = useRouter();
 
   const dispatch = (...arg) => {
-    const [path, query = {}] = arg;
+    const [path, query = null] = arg;
     window.$wujie
-      ? window.$wujie?.bus.$emit(
-          'route-change',
-          query ? `${path}=${stringify(query)}` : path
-        )
+      ? window.$wujie?.bus.$emit('route-change', query ? `${path}?${stringify(query)}` : path)
       : router.push({ path, query });
   };
   return { dispatch };
